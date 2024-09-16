@@ -98,7 +98,7 @@ func main() {
 			answer = convertOne / convertTwo
 		}
 
-		if checkRomOne && checkRomTwo && answer < 0 { //Проверка чтобы не было минуса
+		if checkRomOne && checkRomTwo && answer <= 0 { //Проверка чтобы не было минуса
 			panic("Выдача паники, так как в римской системе нет отрицательных чисел.")
 		} else if checkRomOne && checkRomTwo { //Вывод для римского варианта
 			fmt.Println("Ваш ответ...")
