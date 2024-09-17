@@ -10,7 +10,8 @@ var romanList = []struct {
 	symbol   string
 	inputNum int
 }{
-	{"I", 1}, {"V", 5}, {"X", 10}, {"L", 50},
+	{"I", 1}, {"II", 2}, {"III", 3}, {"IV", 4}, {"V", 5}, {"VI", 6},
+	{"VII", 7}, {"VIII", 8}, {"IX", 9}, {"X", 10}, {"L", 50},
 }
 
 // Карта с римского варианта
@@ -48,6 +49,23 @@ func decimalToRomanRecursive(num int) string {
 	return ""
 }
 
+func checkLegit(numOne string) bool {
+	checkLegit := false
+
+	for _, check := range romanList {
+		if check.symbol == numOne{
+			checkLegit = true
+			
+		}
+	}
+
+	if checkLegit == false{
+		panic("Вы ввели число которого нет в римской системе счисления")
+	}
+
+	return checkLegit
+}
+
 func main() {
 	var numOne string
 	var numTwo string
@@ -55,36 +73,39 @@ func main() {
 	checkRomOne := false
 	checkRomTwo := false
 	answer := 0
+	//i := false
 
 	//Считывание ввода пользователем
 	fmt.Println("ВВедите значение...")
 	n, err := fmt.Scanln(&numOne, &sym, &numTwo)
+
+	//Обработка ошибки, если больше трех значений
+	if n != 3 && n > 1 {
+		panic("Выдача паники, так как формат математической операции не удовлетворяет заданию — два операнда и один оператор (+, -, /, *).")
+	}
 
 	//Обработка ошибки, если меньше 3 элементов
 	if err != nil {
 		panic("Выдача паники, так как строка не является математической операцией.")
 	}
 
-	//Обработка ошибки, если больше трех значений
-	if n != 3 && n > 2 {
-		panic("Выдача паники, так как формат математической операции не удовлетворяет заданию — два операнда и один оператор (+, -, /, *).")
-	}
+	
 
 	//Конвертация из строки в число
 	convertOne, err := strconv.Atoi(numOne)
 	if err != nil {
+		checkLegit(numOne)
 		convertOne = serchNum(numOne)
 		checkRomOne = true
 	}
 	convertTwo, err := strconv.Atoi(numTwo)
 	if err != nil {
+		checkLegit(numTwo)
 		convertTwo = serchNum(numTwo)
 		checkRomTwo = true
 	}
 
-	if convertOne <= 0 || convertOne > 10 || convertTwo <= 0 || convertTwo > 10 {
-     panic("Калькулятор должен принимать на вход числа от 1 до 10 включительно, не более.") 
-     } else if checkRomOne != checkRomTwo { //Проверка, чтобы оба числа были одной системы счисления
+	if checkRomOne != checkRomTwo { //Проверка, чтобы оба числа были одной системы счисления
 		panic("Выдача паники, так как используются одновременно разные системы счисления.")
 	} else if checkRomOne == checkRomTwo { //Подсчет ответа
 		switch sym {
