@@ -105,7 +105,9 @@ func main() {
 		checkRomTwo = true
 	}
 
-	if checkRomOne != checkRomTwo { //Проверка, чтобы оба числа были одной системы счисления
+	if convertOne <= 0 || convertOne > 10 || convertTwo <= 0 || convertTwo > 10 {
+     panic("Калькулятор должен принимать на вход числа от 1 до 10 включительно, не более.") 
+     } else if checkRomOne != checkRomTwo { //Проверка, чтобы оба числа были одной системы счисления
 		panic("Выдача паники, так как используются одновременно разные системы счисления.")
 	} else if checkRomOne == checkRomTwo { //Подсчет ответа
 		switch sym {
