@@ -28,6 +28,12 @@ var romanMap = []struct {
 func serchNum(sym string) int {
 	var zeroInt = 0
 
+	for _, pair := range romanList {
+        if pair.symbol == sym {
+            fmt.Println(pair.inputNum)
+            return pair.inputNum
+        }
+
 	for j := 0; j < len(sym); j++ {
 		for _, i := range romanList {
 			if string(sym[j]) == i.symbol {
