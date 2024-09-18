@@ -32,6 +32,7 @@ func serchNum(sym string) int {
         if pair.symbol == sym {
             fmt.Println(pair.inputNum)
             return pair.inputNum
+		}
         }
 
 	for j := 0; j < len(sym); j++ {
